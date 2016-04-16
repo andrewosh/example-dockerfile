@@ -6,7 +6,11 @@ USER root
 
 # Add Julia dependencies
 RUN apt-get update
-RUN apt-get install -y julia libnettle4 && apt-get clean
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository ppa:staticfloat/juliareleases
+RUN add-apt-repository ppa:staticfloat/julia-deps
+RUN apt-get update
+RUN apt-get -install -y julia libnettle4 && apt-get clean
 
 USER main
 
