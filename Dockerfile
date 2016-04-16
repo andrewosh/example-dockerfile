@@ -5,14 +5,13 @@ MAINTAINER Andrew Osheroff <andrewosh@gmail.com>
 USER root
 
 # Add Julia dependencies
-RUN apt-get update
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:staticfloat/juliareleases
-RUN add-apt-repository ppa:staticfloat/julia-deps
-RUN apt-get update
-RUN apt-get -install -y julia libnettle4 && apt-get clean
+RUN apt-get update && apt-get install -y wget && apt-get clean
 
 USER main
+
+RUN wget https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.5-linux-x86_64.tar.gz
+RUN tar xvf julia-0.4.5-linux-x86_64.tar.gz -C $HOME/julia
+ENV PATH $PATH:$HOME/julia/bin
 
 # Install Julia kernel
 RUN julia -e 'Pkg.add("IJulia")'
