@@ -5,7 +5,8 @@ MAINTAINER Andrew Osheroff <andrewosh@gmail.com>
 USER root
 
 # Add Julia dependencies
-RUN apt-get update && apt-get install -y wget && apt-get clean
+RUN apt-get update && apt-get install -y wget
+RUN apt-get -y --force-yes install default-jre && apt-get clean
 
 USER main
 
